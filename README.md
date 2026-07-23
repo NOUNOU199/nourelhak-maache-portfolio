@@ -1,98 +1,45 @@
-# vinext-starter
+# Nourelhak Maache — Portfolio
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+My personal portfolio, built to introduce who I am before listing what I use.
+It brings together my work in full-stack development, AI experiments,
+automation, and student projects at ESI Algiers.
 
-## Prerequisites
+## Highlights
 
-- Node.js `>=22.13.0`
+- A cinematic, responsive portfolio with a custom cursor and reduced-motion mode
+- A transparent portrait treatment with restrained hover depth
+- Individual visual worlds for Fidelio, Aglic Assurances, Agentic Codecorrect,
+  Twenty Academy, and LMCS Labo
+- Direct links to my résumé, GitHub, LinkedIn, and email
 
-## Quick Start
+## Run locally
+
+You need Node.js `22.13.0` or newer.
 
 ```bash
 npm install
 npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Quality checks
+
+```bash
+npm run lint
 npm run build
+npm test
 ```
 
-This starter does not use `wrangler.jsonc`.
+## Project structure
 
-## Included Shape
+- `app/page.tsx` contains the portfolio content and interactions.
+- `app/globals.css` contains the visual system, responsive layout, and motion.
+- `app/layout.tsx` contains fonts and social metadata.
+- `public/assets/` contains the portrait artwork.
+- `public/Nourelhak-Maache-CV.pdf` is the downloadable résumé.
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+## Deploy
 
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
-```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+This is a standard Next.js application and can be imported directly into
+Vercel. No database or environment variables are required.

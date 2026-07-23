@@ -32,7 +32,7 @@ Use a responsive 12-column desktop system with single-purpose viewport chapters.
 
 - Full-screen progress loader with moving role ticker
 - Minimal persistent navigation with two-line hover transitions
-- Interactive character stage with layered light, cursor parallax, and scroll rotation
+- Character stage with layered light and restrained hover depth
 - Full-viewport project chapters with bespoke visual systems
 - Fidelio loyalty-card scene and product-system storytelling
 - Technical tool cloud and two-part contact gateway
@@ -41,8 +41,12 @@ Controls use restrained 10–14px radii or full pills. Borders are structural; s
 
 ## Motion
 
-Use a staged progress loader, clip-path reveal, smooth native scrolling, transform-driven hero parallax, orbit motion, and deliberate object reactions within projects. Hover motion uses exponential easing with no bounce. Under `prefers-reduced-motion`, skip the loader, remove parallax and ambient motion, keep content visible, and use immediate state changes.
+Use a staged progress loader, clip-path reveal, smooth native scrolling, orbit motion, and deliberate object reactions within projects. The portrait rests still, then responds to direct hover with a subtle lift and shallow 3D tilt. Fidelio’s stacked cards separate and rise individually on hover. Hover motion uses exponential easing with no bounce. Under `prefers-reduced-motion`, skip the loader, remove ambient motion, keep content visible, and use immediate state changes.
+
+Desktop fine-pointer devices use a custom cursor: a precise dot with a delayed outline ring that expands into contextual `OPEN`, `VIEW`, or `SCROLL` states over interactive targets. A slim edge progress line shows the visitor’s place in the long-form story. Selected headings and project scenes receive one-time focus-pull entrances; these enhance content that remains visible by default.
+
+The cursor carries a controlled violet-white glow with tight falloff. Its active state becomes brighter and larger without broad neon bloom.
 
 ## Imagery
 
-The hero uses a stylized 3D likeness generated from Nourelhak’s supplied photographs. Fidelio receives a bespoke product visualization rooted in the platform’s real multi-merchant loyalty model. Supporting photography should be used sparingly and only when it strengthens the human story.
+The hero uses a transparent cutout of the 3D likeness generated from Nourelhak’s supplied photographs. The clean silhouette lets the violet stage lighting sit naturally behind the figure without a visible rectangular photo background. Fidelio receives a bespoke product visualization rooted in the platform’s real multi-merchant loyalty model.

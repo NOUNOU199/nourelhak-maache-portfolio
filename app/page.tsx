@@ -1,25 +1,47 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const projects = [
+type ProjectVisualType =
+  | "fidelio"
+  | "aglic"
+  | "agentic"
+  | "academy"
+  | "lmcs";
+
+type Project = {
+  number: string;
+  name: string;
+  type: string;
+  description: string;
+  stack: string;
+  year: string;
+  visual: ProjectVisualType;
+  href?: string;
+};
+
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const INTERACTIVE_CURSOR_SELECTOR = "a, button, [data-cursor]";
+const LOADER_DURATION_MS = 1350;
+
+const projects: Project[] = [
   {
     number: "01",
     name: "Fidelio",
     type: "Digital loyalty / Product",
     description:
-      "Algeria’s multi-merchant digital loyalty platform—one identity for every reward, built for customers and local commerce.",
+      "I’m building Fidelio to replace paper loyalty cards with one digital experience that works across different Algerian merchants.",
     stack: "Flutter · TypeScript · PostgreSQL · Docker",
     year: "2026",
     visual: "fidelio",
-    href: "#fidelio",
   },
   {
     number: "02",
     name: "Aglic Assurances",
     type: "Actuarial intelligence",
     description:
-      "A data-heavy platform that calculates, explains, and exports six technical insurance provisions from complex Excel workflows.",
+      "Built around a real actuarial workflow: upload Excel files, calculate six insurance provisions, review dashboards, and export the results.",
     stack: "Python · Flask · React · Pandas",
     year: "2025",
     visual: "aglic",
@@ -30,7 +52,7 @@ const projects = [
     name: "Agentic Codecorrect",
     type: "AI agents / Automation",
     description:
-      "Specialized AI agents collaborate to detect errors, propose refactors, and validate cleaner code through one coordinated pipeline.",
+      "An experiment with specialized AI agents: one finds problems, another suggests a refactor, and another checks the result.",
     stack: "Python · OpenAI Swarm",
     year: "2025",
     visual: "agentic",
@@ -41,7 +63,7 @@ const projects = [
     name: "Twenty Academy",
     type: "Education ERP",
     description:
-      "A modular education operating system for learners, training programs, resources, and secure institutional workflows.",
+      "A modular ERP for educational institutions, covering learners, training programs, resources, and secure client–server communication.",
     stack: "TypeScript · Next.js",
     year: "2024—Now",
     visual: "academy",
@@ -52,7 +74,7 @@ const projects = [
     name: "LMCS Labo",
     type: "Research archive",
     description:
-      "A living home for researchers and publications, kept current through automated scholarly-source scraping.",
+      "A team-built research archive with researcher profiles, publication discovery, and automated updates from scholarly sources.",
     stack: "React · Express.js · Web scraping",
     year: "2024",
     visual: "lmcs",
@@ -87,26 +109,26 @@ const experience = [
   {
     year: "NOW",
     title: "Building Fidelio",
-    place: "Founder’s mindset / Product engineering",
-    copy: "Turning a local loyalty problem into a scalable mobile, web, API, worker, and infrastructure system.",
+    place: "Independent product",
+    copy: "Taking a familiar local problem from rough idea to mobile app, web experience, API, worker, and deployment setup.",
   },
   {
     year: "2025",
-    title: "Applied AI & actuarial systems",
-    place: "Independent and academic projects",
-    copy: "Exploring coordinated AI agents while shipping data-heavy software for real insurance calculations.",
+    title: "Exploring AI and insurance software",
+    place: "Personal and academic projects",
+    copy: "Learning how coordinated agents behave while building software around real actuarial calculations and Excel workflows.",
   },
   {
     year: "2024",
-    title: "Full-stack product development",
-    place: "Project teams / ESI Algiers",
-    copy: "Building education and research platforms from interface to database, with security and maintainability in mind.",
+    title: "Learning full-stack work in teams",
+    place: "Twenty Academy and LMCS Labo",
+    copy: "Working from interface to database on education and research tools, with maintainability and secure data flow in mind.",
   },
   {
     year: "2022—Now",
-    title: "Communication & leadership",
+    title: "Learning to lead and communicate",
     place: "ETIC Club · ESI Algiers",
-    copy: "Coordinating teams, institutional communication, and professional visits with BNP Paribas and Yassir.",
+    copy: "Coordinating teams, event logistics, institutional communication, and student visits to BNP Paribas and Yassir.",
   },
 ];
 
@@ -114,71 +136,211 @@ export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
+  const cursorDotRef = useRef<HTMLDivElement>(null);
+  const cursorRingRef = useRef<HTMLDivElement>(null);
+  const cursorLabelRef = useRef<HTMLSpanElement>(null);
+  const scrollProgressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduced) {
-      setProgress(100);
-      setLoaded(true);
-      return;
+    const prefersReducedMotion =
+      window.matchMedia(REDUCED_MOTION_QUERY).matches;
+
+    if (prefersReducedMotion) {
+      const frame = window.requestAnimationFrame(() => {
+        setProgress(100);
+        setLoaded(true);
+      });
+      return () => window.cancelAnimationFrame(frame);
     }
 
     document.body.classList.add("is-loading");
     const started = performance.now();
-    const duration = 1350;
-    const timer = window.setInterval(() => {
+    let loadingFrame = 0;
+    let finishTimer = 0;
+
+    const updateLoader = () => {
       const elapsed = performance.now() - started;
-      const next = Math.min(100, Math.round((elapsed / duration) * 100));
+      const next = Math.min(
+        100,
+        Math.round((elapsed / LOADER_DURATION_MS) * 100),
+      );
       setProgress(next);
+
       if (next === 100) {
-        window.clearInterval(timer);
-        window.setTimeout(() => {
+        finishTimer = window.setTimeout(() => {
           setLoaded(true);
           document.body.classList.remove("is-loading");
         }, 520);
+        return;
       }
-    }, 24);
+
+      loadingFrame = window.requestAnimationFrame(updateLoader);
+    };
+
+    loadingFrame = window.requestAnimationFrame(updateLoader);
 
     return () => {
-      window.clearInterval(timer);
+      window.cancelAnimationFrame(loadingFrame);
+      window.clearTimeout(finishTimer);
       document.body.classList.remove("is-loading");
     };
   }, []);
 
   useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-      return;
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    const reduced = window.matchMedia(REDUCED_MOTION_QUERY).matches;
+    const dot = cursorDotRef.current;
+    const ring = cursorRingRef.current;
+    const label = cursorLabelRef.current;
+    if (!finePointer || !dot || !ring || !label) return;
 
-    const move = (event: PointerEvent) => {
-      const rect = hero.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      hero.style.setProperty("--mx", `${x * 22}px`);
-      hero.style.setProperty("--my", `${y * 15}px`);
-      hero.style.setProperty("--tilt-x", `${y * -2.2}deg`);
-      hero.style.setProperty("--tilt-y", `${x * 3.4}deg`);
-    };
-    const reset = () => {
-      hero.style.setProperty("--mx", "0px");
-      hero.style.setProperty("--my", "0px");
-      hero.style.setProperty("--tilt-x", "0deg");
-      hero.style.setProperty("--tilt-y", "0deg");
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let ringX = targetX;
+    let ringY = targetY;
+    let frame = 0;
+
+    const renderCursor = () => {
+      ringX += (targetX - ringX) * (reduced ? 1 : 0.16);
+      ringY += (targetY - ringY) * (reduced ? 1 : 0.16);
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      frame = window.requestAnimationFrame(renderCursor);
     };
 
-    hero.addEventListener("pointermove", move);
-    hero.addEventListener("pointerleave", reset);
+    const onPointerMove = (event: PointerEvent) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
+      dot.classList.add("cursor-visible");
+      ring.classList.add("cursor-visible");
+    };
+
+    const onPointerOver = (event: PointerEvent) => {
+      const target =
+        event.target instanceof Element
+          ? event.target.closest<HTMLElement>(INTERACTIVE_CURSOR_SELECTOR)
+          : null;
+      if (!target) {
+        ring.classList.remove("cursor-active");
+        label.textContent = "";
+        return;
+      }
+      ring.classList.add("cursor-active");
+      label.textContent = target.dataset.cursor ?? "OPEN";
+    };
+
+    const onPointerOut = (event: PointerEvent) => {
+      const nextTarget =
+        event.relatedTarget instanceof Element
+          ? event.relatedTarget.closest<HTMLElement>(
+              INTERACTIVE_CURSOR_SELECTOR,
+            )
+          : null;
+      if (!nextTarget) {
+        ring.classList.remove("cursor-active");
+        label.textContent = "";
+      }
+    };
+
+    const onWindowLeave = () => {
+      dot.classList.remove("cursor-visible");
+      ring.classList.remove("cursor-visible");
+    };
+
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerover", onPointerOver, { passive: true });
+    document.addEventListener("pointerout", onPointerOut, { passive: true });
+    document.documentElement.addEventListener("mouseleave", onWindowLeave);
+    frame = window.requestAnimationFrame(renderCursor);
+
     return () => {
-      hero.removeEventListener("pointermove", move);
-      hero.removeEventListener("pointerleave", reset);
+      window.cancelAnimationFrame(frame);
+      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerover", onPointerOver);
+      document.removeEventListener("pointerout", onPointerOut);
+      document.documentElement.removeEventListener("mouseleave", onWindowLeave);
     };
-  }, [loaded]);
+  }, []);
+
+  useEffect(() => {
+    const revealTargets = document.querySelectorAll<HTMLElement>(
+      "[data-reveal]",
+    );
+    const reduced = window.matchMedia(REDUCED_MOTION_QUERY).matches;
+
+    if (reduced || !("IntersectionObserver" in window)) {
+      revealTargets.forEach((target) => target.classList.add("is-in-view"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in-view");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    revealTargets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const closeMenu = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    document.body.classList.add("menu-open");
+    window.addEventListener("keydown", closeMenu);
+
+    return () => {
+      document.body.classList.remove("menu-open");
+      window.removeEventListener("keydown", closeMenu);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const progressBar = scrollProgressRef.current;
+    if (!progressBar) return;
+
+    const update = () => {
+      const available =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = available > 0 ? window.scrollY / available : 0;
+      progressBar.style.transform = `scaleY(${Math.min(1, Math.max(0, ratio))})`;
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   return (
     <main className={loaded ? "portfolio is-ready" : "portfolio"}>
+      <div className="scroll-progress" aria-hidden="true">
+        <div ref={scrollProgressRef} />
+      </div>
+      <div
+        ref={cursorDotRef}
+        className="cursor-dot"
+        aria-hidden="true"
+      />
+      <div
+        ref={cursorRingRef}
+        className="cursor-ring"
+        aria-hidden="true"
+      >
+        <span ref={cursorLabelRef} />
+      </div>
       <div className="loader" aria-hidden={loaded}>
         <div className="loader-header">
           <span>NourelhakMaache</span>
@@ -190,11 +352,11 @@ export default function Home() {
           </span>
         </div>
         <div className="loader-ticker">
-          <span>FULL-STACK DEVELOPER</span>
+          <span>STUDENT</span>
           <i>•</i>
-          <span>AI BUILDER</span>
+          <span>BUILDER</span>
           <i>•</i>
-          <span>AUTOMATION</span>
+          <span>EXPLORER</span>
           <i>•</i>
         </div>
         <div className="loader-progress">
@@ -228,6 +390,7 @@ export default function Home() {
         <nav
           id="primary-navigation"
           className={menuOpen ? "nav-visible" : ""}
+          aria-label="Primary navigation"
         >
           <a href="#about" onClick={() => setMenuOpen(false)}>
             <span>ABOUT</span>
@@ -246,14 +409,15 @@ export default function Home() {
           className="resume-link"
           href="/Nourelhak-Maache-CV.pdf"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
+          data-cursor="OPEN"
         >
           <span>RÉSUMÉ</span>
           <span>RÉSUMÉ</span>
         </a>
       </header>
 
-      <section className="landing" id="top" ref={heroRef}>
+      <section className="landing" id="top">
         <div className="landing-ring ring-a" aria-hidden="true" />
         <div className="landing-ring ring-b" aria-hidden="true" />
         <div className="landing-title">
@@ -265,53 +429,64 @@ export default function Home() {
         </div>
         <div className="hero-character">
           <div className="character-halo" aria-hidden="true" />
-          <img
-            src="/assets/nourelhak-3d.png"
+          <Image
+            className="static-portrait"
+            src="/assets/nourelhak-cutout.png"
             alt="Stylized 3D portrait of Nourelhak Maache"
+            width={1024}
+            height={1536}
+            sizes="(max-width: 720px) 92vw, (max-width: 1000px) 62vw, 46vw"
+            priority
           />
         </div>
         <div className="hero-role">
-          <p>An</p>
+          <p>A</p>
           <div>
             <strong>FULL-STACK DEVELOPER</strong>
             <strong>AI & AUTOMATION BUILDER</strong>
           </div>
         </div>
         <p className="hero-location">ALGIERS, ALGERIA · ESI</p>
-        <a className="scroll-cue" href="#about" aria-label="Scroll to about">
+        <a
+          className="scroll-cue"
+          href="#about"
+          aria-label="Scroll to about"
+          data-cursor="SCROLL"
+        >
           <span>SCROLL</span>
           <b>↓</b>
         </a>
       </section>
 
       <section className="about-reference" id="about">
-        <div className="about-heading">
-          <p>About Me</p>
+        <div className="about-heading" data-reveal>
+          <p>A little about me</p>
           <h2>
-            BUILDING <span>INTELLIGENT</span>
+            CURIOUS ABOUT <span>HARD PROBLEMS.</span>
             <br />
-            SOFTWARE THAT
+            SERIOUS ABOUT
             <br />
-            MOVES IDEAS FORWARD.
+            USEFUL SOFTWARE.
           </h2>
         </div>
         <div className="about-copy">
           <p>
-            I&apos;m a computer science engineering student at ESI Algiers,
-            focused on full-stack products, backend systems, AI agents, and
-            automation.
+            I&apos;m a computer science student at ESI Algiers. I build
+            full-stack products and I&apos;m currently going deeper into AI
+            agents, machine learning, and automation.
           </p>
           <p>
-            I like difficult problems with practical outcomes—from actuarial
-            calculation engines to research archives and Algeria&apos;s first
-            multi-merchant digital loyalty platform.
+            I enjoy the messy middle of a project: understanding the problem,
+            shaping the product, and making everything work from the interface
+            to the API and database. That&apos;s how projects such as Fidelio
+            and Aglic came to life.
           </p>
           <a
             href="https://www.linkedin.com/in/maache-nourelhak-868115342/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
-            MORE ABOUT ME ↗
+            GET TO KNOW ME ↗
           </a>
         </div>
         <div className="about-index" aria-hidden="true">
@@ -320,25 +495,27 @@ export default function Home() {
       </section>
 
       <section className="services">
-        <div className="services-title">
+        <div className="services-title" data-reveal>
           <h2>
-            WHAT
+            HOW
             <br />
-            <span>I DO</span>
+            <span>I BUILD</span>
           </h2>
           <p>
-            I move between product thinking and engineering, joining the pieces
-            that turn an idea into software people can use.
+            I like seeing the whole system. Product decisions, interfaces,
+            APIs, data, and deployment all shape whether an idea becomes useful
+            software.
           </p>
         </div>
         <div className="service service-ai">
           <div className="service-number">A</div>
           <div>
-            <h3>AI DEVELOPER</h3>
-            <h4>Intelligent workflows & agentic automation</h4>
+            <h3>AI & AUTOMATION</h3>
+            <h4>Exploring useful work for intelligent systems</h4>
             <p>
-              Building coordinated AI agents, automated analysis pipelines, and
-              practical systems that connect language models to real work.
+              I&apos;m exploring how coordinated agents and automated analysis
+              can take repetitive technical work off people&apos;s plates
+              without hiding what the system is doing.
             </p>
           </div>
           <div className="skill-line">
@@ -351,12 +528,12 @@ export default function Home() {
         <div className="service service-fullstack">
           <div className="service-number">B</div>
           <div>
-            <h3>FULL-STACK</h3>
-            <h4>Modern products & dependable systems</h4>
+            <h3>FULL-STACK ENGINEERING</h3>
+            <h4>Owning the path from interface to infrastructure</h4>
             <p>
-              Designing responsive interfaces, APIs, data models, and
-              infrastructure as one maintainable product—not disconnected
-              layers.
+              I enjoy connecting responsive interfaces, clear APIs, thoughtful
+              data models, and dependable infrastructure into one maintainable
+              product.
             </p>
           </div>
           <div className="skill-line">
@@ -369,9 +546,9 @@ export default function Home() {
       </section>
 
       <section className="career">
-        <div className="career-heading">
-          <p>My career &</p>
-          <h2>EXPERIENCE</h2>
+        <div className="career-heading" data-reveal>
+          <p>What I&apos;ve learned by shipping</p>
+          <h2>MY PATH</h2>
         </div>
         <div className="timeline">
           {experience.map((item) => (
@@ -388,9 +565,9 @@ export default function Home() {
       </section>
 
       <section className="work-reference" id="work">
-        <div className="work-heading">
-          <p>Selected creations</p>
-          <h2>MY WORK</h2>
+        <div className="work-heading" data-reveal>
+          <p>Projects I can explain line by line</p>
+          <h2>SELECTED WORK</h2>
         </div>
         <div className="work-list">
           {projects.map((project) => (
@@ -400,7 +577,7 @@ export default function Home() {
               key={project.name}
             >
               <div className="work-number">{project.number}</div>
-              <div className="work-info">
+              <div className="work-info" data-reveal>
                 <p>{project.type}</p>
                 <h3>{project.name}</h3>
                 <p className="work-description">{project.description}</p>
@@ -408,17 +585,22 @@ export default function Home() {
                   <span>Tools and features</span>
                   <p>{project.stack}</p>
                 </div>
-                <a
-                  href={project.href}
-                  target={project.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    project.href.startsWith("http") ? "noreferrer" : undefined
-                  }
-                >
-                  VIEW PROJECT ↗
-                </a>
+                {project.href ? (
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="VIEW"
+                  >
+                    VIEW THE CODE ↗
+                  </a>
+                ) : (
+                  <span className="work-status">BUILDING IN PUBLIC · 2026</span>
+                )}
               </div>
-              <ProjectVisual type={project.visual} name={project.name} />
+              <div className="work-visual-reveal" data-reveal>
+                <ProjectVisual type={project.visual} name={project.name} />
+              </div>
               <span className="work-year">{project.year}</span>
             </article>
           ))}
@@ -426,9 +608,9 @@ export default function Home() {
       </section>
 
       <section className="stack-reference">
-        <div className="stack-heading">
-          <p>Technologies I use to make ideas real</p>
-          <h2>TECH STACK</h2>
+        <div className="stack-heading" data-reveal>
+          <p>The tools I reach for</p>
+          <h2>MY TOOLBOX</h2>
         </div>
         <div className="stack-cloud">
           {tools.map((tool, index) => (
@@ -448,15 +630,15 @@ export default function Home() {
           <a
             href="https://github.com/NOUNOU199"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
-            EXPLORE MY CODE <span>→</span>
+            SEE THE CODE <span>→</span>
           </a>
           <a href="mailto:mn.maache@esi.dz">
-            HIRE ME <span>→</span>
+            START A CONVERSATION <span>→</span>
           </a>
         </div>
-        <div className="contact-main">
+        <div className="contact-main" data-reveal>
           <p>Have an internship, collaboration, or product in mind?</p>
           <h2>
             LET&apos;S BUILD
@@ -475,21 +657,21 @@ export default function Home() {
             <a
               href="https://github.com/NOUNOU199"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
-              Github ↗
+              GitHub ↗
             </a>
             <a
               href="https://www.linkedin.com/in/maache-nourelhak-868115342/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               LinkedIn ↗
             </a>
           </div>
           <div>
             <h4>Built with</h4>
-            <p>Curiosity, code & intention</p>
+            <p>Care, curiosity & plenty of debugging</p>
             <p>© {new Date().getFullYear()}</p>
           </div>
         </div>
@@ -498,13 +680,25 @@ export default function Home() {
   );
 }
 
-function ProjectVisual({ type, name }: { type: string; name: string }) {
+function ProjectVisual({
+  type,
+  name,
+}: {
+  type: ProjectVisualType;
+  name: string;
+}) {
   return (
-    <div className="project-visual" aria-label={`${name} project visualization`}>
+    <div
+      className="project-visual"
+      role="img"
+      aria-label={`${name} project visualization`}
+    >
       {type === "fidelio" && (
         <>
           <div className="fidelio-orbit" />
-          <div className="fidelio-card card-purple">FIDELIO</div>
+          <div className="fidelio-card card-purple">
+            FIDELIO
+          </div>
           <div className="fidelio-card card-lime">
             <span>FIDELIO</span>
             <strong>ALL YOUR REWARDS.</strong>
