@@ -1,45 +1,48 @@
 # Nourelhak Maache — Portfolio
 
-My personal portfolio, built to introduce who I am before listing what I use.
-It brings together my work in full-stack development, AI experiments,
-automation, and student projects at ESI Algiers.
+A bilingual portfolio for freelance clients, recruiters, and collaborators. It presents MEDTresor, Madrasatuk, and MATENSANICH through real product screens and dedicated case studies, with earlier work preserved in an expandable archive.
 
-## Highlights
-
-- A cinematic, responsive portfolio with a custom cursor and reduced-motion mode
-- A transparent portrait treatment with restrained hover depth
-- Individual visual worlds for Fidelio, Aglic Assurances, Agentic Codecorrect,
-  Twenty Academy, and LMCS Labo
-- Direct links to my résumé, GitHub, LinkedIn, and email
+The interface uses self-hosted Manrope and Instrument Serif, light and dark themes, native scrolling, a manual project carousel, and reduced-motion support. English is the default; French covers the homepage and case studies. Language and theme preferences persist locally.
 
 ## Run locally
 
-You need Node.js `22.13.0` or newer.
+Use Node.js 22.13.0 or newer.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [localhost:3000](http://localhost:3000). No database or application secrets are required.
 
 ## Quality checks
 
 ```bash
 npm run lint
 npm run build
-npm test
+node --test tests/portfolio.test.mjs
 ```
 
-## Project structure
+`npm test` runs all three checks. Browser verification should cover 390px, 768px, and 1440px in both themes, French copy, keyboard navigation, carousel selection, and the case-study routes. Review captures are kept under `.impeccable/review/`.
 
-- `app/page.tsx` contains the portfolio content and interactions.
-- `app/globals.css` contains the visual system, responsive layout, and motion.
-- `app/layout.tsx` contains fonts and social metadata.
-- `public/assets/` contains the portrait artwork.
-- `public/Nourelhak-Maache-CV.pdf` is the downloadable résumé.
+## Source and content
 
-## Deploy
+- `app/page.tsx`: homepage, project stage, archive, and contact interactions.
+- `app/content.ts`: English/French copy, featured project data, and earlier projects.
+- `app/site-shell.tsx`: navigation, inline SVG icons, locale/theme state, and footer.
+- `app/work/[slug]/page.tsx`: generated project routes and metadata.
+- `app/work/[slug]/project-story.tsx`: bilingual case-study presentation.
+- `app/globals.css`: semantic palette, typography, responsive layout, and CSS motion.
+- `app/layout.tsx`: self-hosted fonts, global metadata, and initial theme setup.
+- `app/opengraph-image.tsx`: social preview image.
+- `public/projects/`: public project screenshots; `sources.json` records their provenance.
+- `public/Nourelhak-Maache-CV.pdf`: downloadable résumé.
+- `DESIGN.md` and `.impeccable/design.json`: the shipped design system and preview extensions.
 
-This is a standard Next.js application and can be imported directly into
-Vercel. No database or environment variables are required.
+Featured routes are `/work/medtresor`, `/work/madrasatuk`, and `/work/matensanich`. Append `?lang=fr` for French, or use the language control.
+
+## Deployment
+
+Continue deploying to the existing Vercel project linked in `.vercel/project.json`. Keep project linkage local and do not commit authentication material. The stable production alias is [portfolionounou.vercel.app](https://portfolionounou.vercel.app); new production deployments update that alias. Deployment-specific URLs identify individual deployments and are separate from the stable alias.
+
+From the linked project directory, use `vercel --prod` with an authenticated Vercel CLI. The app needs no application secrets. Vercel supplies `VERCEL_PROJECT_PRODUCTION_URL` for the metadata origin; `NEXT_PUBLIC_SITE_URL` can explicitly override it, and local development falls back to `http://localhost:3000`.

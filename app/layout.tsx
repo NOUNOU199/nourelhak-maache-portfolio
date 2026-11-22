@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Azeret_Mono, Bricolage_Grotesque } from "next/font/google";
+import "@fontsource-variable/manrope";
+import "@fontsource/instrument-serif/latin-400.css";
+import "@fontsource/instrument-serif/latin-400-italic.css";
 import "./globals.css";
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-});
-
-const azeret = Azeret_Mono({
-  variable: "--font-azeret",
-  subsets: ["latin"],
-});
+import { SiteShell } from "./site-shell";
 
 const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const siteUrl =
@@ -35,7 +28,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: "/og.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Nourelhak Maache — full-stack developer and AI explorer",
@@ -46,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og.png"],
+    images: ["/opengraph-image"],
   },
 };
 
@@ -56,9 +49,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${bricolage.variable} ${azeret.variable}`}>
-        {children}
+    <html lang="en" data-theme="light" suppressHydrationWarning>
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{document.documentElement.dataset.theme=localStorage.getItem('portfolio-theme')==='dark'?'dark':'light'}catch(e){}",
+          }}
+        />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

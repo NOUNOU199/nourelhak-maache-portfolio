@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-22T18:50:40.495540+00:00",
+  "title": "Design System: Nourelhak Maache Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(0.150 0.0015 106.5)",
+          "oklch(0.260 0.0032 106.5)",
+          "oklch(0.380 0.0050 106.5)",
+          "oklch(0.500 0.0053 106.5)",
+          "oklch(0.620 0.0053 106.5)",
+          "oklch(0.740 0.0053 106.5)",
+          "oklch(0.850 0.0032 106.5)",
+          "oklch(0.950 0.0011 106.5)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(0.150 0.0100 166.2)",
+          "oklch(0.260 0.0210 166.2)",
+          "oklch(0.380 0.0330 166.2)",
+          "oklch(0.500 0.0350 166.2)",
+          "oklch(0.620 0.0350 166.2)",
+          "oklch(0.740 0.0350 166.2)",
+          "oklch(0.850 0.0210 166.2)",
+          "oklch(0.950 0.0070 166.2)"
+        ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Secondary",
+        "tonalRamp": [
+          "oklch(0.150 0.0050 157.8)",
+          "oklch(0.260 0.0104 157.8)",
+          "oklch(0.380 0.0164 157.8)",
+          "oklch(0.500 0.0174 157.8)",
+          "oklch(0.620 0.0174 157.8)",
+          "oklch(0.740 0.0174 157.8)",
+          "oklch(0.850 0.0104 157.8)",
+          "oklch(0.950 0.0035 157.8)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "tonalRamp": [
+          "oklch(0.150 0.0038 130.8)",
+          "oklch(0.260 0.0080 130.8)",
+          "oklch(0.380 0.0126 130.8)",
+          "oklch(0.500 0.0134 130.8)",
+          "oklch(0.620 0.0134 130.8)",
+          "oklch(0.740 0.0134 130.8)",
+          "oklch(0.850 0.0080 130.8)",
+          "oklch(0.950 0.0027 130.8)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Accent",
+        "tonalRamp": [
+          "oklch(0.150 0.0196 161.0)",
+          "oklch(0.260 0.0412 161.0)",
+          "oklch(0.380 0.0647 161.0)",
+          "oklch(0.500 0.0686 161.0)",
+          "oklch(0.620 0.0686 161.0)",
+          "oklch(0.740 0.0686 161.0)",
+          "oklch(0.850 0.0412 161.0)",
+          "oklch(0.950 0.0137 161.0)"
+        ]
+      },
+      "hover": {
+        "role": "neutral",
+        "displayName": "Hover",
+        "tonalRamp": [
+          "oklch(0.150 0.0032 123.5)",
+          "oklch(0.260 0.0067 123.5)",
+          "oklch(0.380 0.0105 123.5)",
+          "oklch(0.500 0.0111 123.5)",
+          "oklch(0.620 0.0111 123.5)",
+          "oklch(0.740 0.0111 123.5)",
+          "oklch(0.850 0.0067 123.5)",
+          "oklch(0.950 0.0022 123.5)"
+        ]
+      },
+      "about": {
+        "role": "neutral",
+        "displayName": "About",
+        "tonalRamp": [
+          "oklch(0.150 0.0108 165.6)",
+          "oklch(0.260 0.0226 165.6)",
+          "oklch(0.380 0.0356 165.6)",
+          "oklch(0.500 0.0377 165.6)",
+          "oklch(0.620 0.0377 165.6)",
+          "oklch(0.740 0.0377 165.6)",
+          "oklch(0.850 0.0226 165.6)",
+          "oklch(0.950 0.0075 165.6)"
+        ]
+      },
+      "about-ink": {
+        "role": "neutral",
+        "displayName": "About Ink",
+        "tonalRamp": [
+          "oklch(0.150 0.0035 116.8)",
+          "oklch(0.260 0.0073 116.8)",
+          "oklch(0.380 0.0114 116.8)",
+          "oklch(0.500 0.0121 116.8)",
+          "oklch(0.620 0.0121 116.8)",
+          "oklch(0.740 0.0121 116.8)",
+          "oklch(0.850 0.0073 116.8)",
+          "oklch(0.950 0.0024 116.8)"
+        ]
+      },
+      "dark-paper": {
+        "role": "neutral",
+        "displayName": "Dark Paper",
+        "tonalRamp": [
+          "oklch(0.150 0.0037 160.1)",
+          "oklch(0.260 0.0077 160.1)",
+          "oklch(0.380 0.0121 160.1)",
+          "oklch(0.500 0.0129 160.1)",
+          "oklch(0.620 0.0129 160.1)",
+          "oklch(0.740 0.0129 160.1)",
+          "oklch(0.850 0.0077 160.1)",
+          "oklch(0.950 0.0026 160.1)"
+        ]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Dark Ink",
+        "tonalRamp": [
+          "oklch(0.150 0.0033 128.6)",
+          "oklch(0.260 0.0069 128.6)",
+          "oklch(0.380 0.0108 128.6)",
+          "oklch(0.500 0.0114 128.6)",
+          "oklch(0.620 0.0114 128.6)",
+          "oklch(0.740 0.0114 128.6)",
+          "oklch(0.850 0.0069 128.6)",
+          "oklch(0.950 0.0023 128.6)"
+        ]
+      },
+      "dark-secondary": {
+        "role": "neutral",
+        "displayName": "Dark Secondary",
+        "tonalRamp": [
+          "oklch(0.150 0.0057 140.5)",
+          "oklch(0.260 0.0120 140.5)",
+          "oklch(0.380 0.0189 140.5)",
+          "oklch(0.500 0.0200 140.5)",
+          "oklch(0.620 0.0200 140.5)",
+          "oklch(0.740 0.0200 140.5)",
+          "oklch(0.850 0.0120 140.5)",
+          "oklch(0.950 0.0040 140.5)"
+        ]
+      },
+      "dark-rule": {
+        "role": "neutral",
+        "displayName": "Dark Rule",
+        "tonalRamp": [
+          "oklch(0.150 0.0068 147.4)",
+          "oklch(0.260 0.0143 147.4)",
+          "oklch(0.380 0.0225 147.4)",
+          "oklch(0.500 0.0239 147.4)",
+          "oklch(0.620 0.0239 147.4)",
+          "oklch(0.740 0.0239 147.4)",
+          "oklch(0.850 0.0143 147.4)",
+          "oklch(0.950 0.0048 147.4)"
+        ]
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Dark Accent",
+        "tonalRamp": [
+          "oklch(0.150 0.0186 136.0)",
+          "oklch(0.260 0.0390 136.0)",
+          "oklch(0.380 0.0613 136.0)",
+          "oklch(0.500 0.0650 136.0)",
+          "oklch(0.620 0.0650 136.0)",
+          "oklch(0.740 0.0650 136.0)",
+          "oklch(0.850 0.0390 136.0)",
+          "oklch(0.950 0.0130 136.0)"
+        ]
+      },
+      "dark-hover": {
+        "role": "neutral",
+        "displayName": "Dark Hover",
+        "tonalRamp": [
+          "oklch(0.150 0.0063 150.3)",
+          "oklch(0.260 0.0132 150.3)",
+          "oklch(0.380 0.0207 150.3)",
+          "oklch(0.500 0.0220 150.3)",
+          "oklch(0.620 0.0220 150.3)",
+          "oklch(0.740 0.0220 150.3)",
+          "oklch(0.850 0.0132 150.3)",
+          "oklch(0.950 0.0044 150.3)"
+        ]
+      },
+      "dark-about": {
+        "role": "neutral",
+        "displayName": "Dark About",
+        "tonalRamp": [
+          "oklch(0.150 0.0108 159.8)",
+          "oklch(0.260 0.0227 159.8)",
+          "oklch(0.380 0.0357 159.8)",
+          "oklch(0.500 0.0379 159.8)",
+          "oklch(0.620 0.0379 159.8)",
+          "oklch(0.740 0.0379 159.8)",
+          "oklch(0.850 0.0227 159.8)",
+          "oklch(0.950 0.0076 159.8)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Hero name",
+        "purpose": "Sans-serif first name; italic serif surname is a deliberate inline override."
+      }
+    },
+    "shadows": [
+      {
+        "name": "product-screen",
+        "value": "0 16px 32px #14281d18",
+        "purpose": "Carousel and case-study screenshots."
+      }
+    ],
+    "motion": [
+      {
+        "name": "editorial-ease",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Name arrival, image response, mask changes, and navigation underline."
+      },
+      {
+        "name": "slide-mask",
+        "value": "0.7s",
+        "purpose": "Manually selected project transition; reduced motion uses 0.1s opacity."
+      },
+      {
+        "name": "stage-scroll-scale",
+        "value": "0.97 \u2192 1",
+        "purpose": "Spring-smoothed native scroll progress; disabled for reduced motion."
+      },
+      {
+        "name": "magnetic-contact",
+        "value": "stiffness: 220; damping: 24; displacement: 0.14",
+        "purpose": "Fine-pointer direct-email response only."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone-max",
+        "value": "700px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "1100px"
+      },
+      {
+        "name": "wide-min",
+        "value": "1500px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Solid link",
+      "kind": "button",
+      "refersTo": "button-solid",
+      "description": "Filled case-study action.",
+      "html": "<a class=\"ds-solid\" href=\"#project\">View website</a>",
+      "css": ".ds-solid{display:inline-flex;align-items:center;gap:1rem;min-height:50px;padding:.75rem 1.25rem;background:var(--accent);color:var(--paper);border-radius:2px;font: .95rem \"Manrope Variable\",sans-serif;text-decoration:none}.ds-solid:focus-visible{outline:2px solid var(--accent);outline-offset:6px}"
+    },
+    {
+      "name": "Icon button",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "Circular carousel, theme, and copy control.",
+      "html": "<button class=\"ds-icon\" aria-label=\"Next project\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"m10 6 6 6-6 6\"/></svg></button>",
+      "css": ".ds-icon{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--rule);background:none;color:var(--ink);border-radius:50%;cursor:pointer;transition:background-color .2s,color .2s}.ds-icon:hover{background:var(--hover)}.ds-icon:focus-visible{outline:2px solid var(--accent);outline-offset:3px}"
+    },
+    {
+      "name": "Text link",
+      "kind": "button",
+      "refersTo": "link-text",
+      "description": "Underlined editorial action with expanding SVG gap.",
+      "html": "<a class=\"ds-link\" href=\"#work\">Explore my work<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12 3v17m-6-6 6 6 6-6\"/></svg></a>",
+      "css": ".ds-link{display:inline-flex;align-items:center;gap:.7rem;min-height:44px;padding:.3rem 0;border-bottom:1px solid currentColor;color:var(--ink);font:550 .9rem \"Manrope Variable\",sans-serif;text-decoration:none;transition:color .2s,gap .3s}.ds-link:hover{color:var(--accent);gap:1rem}.ds-link:focus-visible{outline:2px solid var(--accent);outline-offset:6px}"
+    },
+    {
+      "name": "Main navigation",
+      "kind": "nav",
+      "description": "Quiet header links with a left-origin underline.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#work\">Work</a><a href=\"#about\">About</a><a href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:2.25rem;color:var(--ink);font:.95rem \"Manrope Variable\",sans-serif}.ds-nav a{position:relative;color:inherit;text-decoration:none}.ds-nav a::after{content:\"\";position:absolute;bottom:-.2rem;left:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.22,1,.36,1)}.ds-nav a:hover::after{transform:scaleX(1)}.ds-nav a:focus-visible{outline:2px solid var(--accent);outline-offset:6px}"
+    },
+    {
+      "name": "Contact disc",
+      "kind": "custom",
+      "refersTo": "contact-disc",
+      "description": "Round direct-email invitation; live magnetic behavior is in app/page.tsx.",
+      "html": "<a class=\"ds-contact\" href=\"mailto:mn.maache@esi.dz\"><svg width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\"><path d=\"M13 4h7v7m0-7L10 14M9 4H4v16h16v-5\"/></svg>Let\u2019s talk</a>",
+      "css": ".ds-contact{width:180px;height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.25rem;background:var(--accent);color:var(--paper);border-radius:50%;text-align:center;font:.875rem \"Manrope Variable\",sans-serif;text-decoration:none}.ds-contact:focus-visible{outline:2px solid var(--accent);outline-offset:6px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Refined Studio Portfolio",
+    "overview": "Calm editorial composition gives Nourelhak a personal typographic identity while genuine product screens provide the visual evidence. Deep green ink, warm neutral paper, and an italic serif create character through proportion and contrast.\n\nThe interface stays open and lightly ruled. Native scrolling, manual project navigation, and quiet responses keep the work easy to explore in English and French, in light and dark themes. This records the completed direction A rebuild, replacing the retired violet portrait system.",
+    "keyCharacteristics": [
+      "Open editorial composition with generous gutters.",
+      "Manrope structure paired with expressive Instrument Serif.",
+      "Real project screenshots and restrained image depth.",
+      "Manual interaction, visible focus, and reduced-motion support."
+    ],
+    "rules": [
+      {
+        "name": "The Theme Roles Rule",
+        "body": "Use the existing semantic CSS variables for shared surfaces and controls so both theme mappings remain coherent.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Keep prose and controls in Manrope; reserve Instrument Serif for editorial headings and deliberate emphasis.",
+        "section": "typography"
+      },
+      {
+        "name": "The Screen Depth Rule",
+        "body": "Keep the established image shadow attached to product imagery; preserve the flat treatment of prose and project rows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve semantic theme roles and readable contrast in both themes.",
+      "Do use real public project screenshots with recorded provenance.",
+      "Do retain native scrolling, manual carousel control, and reduced-motion behavior.",
+      "Do keep English and French content complete when extending the site.",
+      "Do use rules and open space to organize prose and project lists."
+    ],
+    "donts": [
+      "Don't reintroduce the retired generated portrait, violet lighting, or artificial loading stage.",
+      "Don't replace project evidence with fabricated metrics or decorative product mockups.",
+      "Don't introduce autoplay into the manual project stage.",
+      "Don't turn the open editorial layout into a repetitive card grid."
+    ]
+  }
+}

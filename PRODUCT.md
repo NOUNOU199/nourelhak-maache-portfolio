@@ -30,4 +30,4 @@ Avoid generic developer templates, résumé pages disguised as portfolios, anony
 
 ## Accessibility & Inclusion
 
-Target WCAG 2.2 AA, maintain strong text contrast, full keyboard navigation, semantic structure, visible focus states, descriptive alternative text, and a complete reduced-motion experience. The first release is English, with content and layout structured for a future French version.
+Target WCAG 2.2 AA, maintain strong text contrast, full keyboard navigation, semantic structure, visible focus states, descriptive alternative text, and a complete reduced-motion experience. English is the default language. French is available throughout the portfolio and project case studies, with a persistent language preference. Light and dark themes are available.
